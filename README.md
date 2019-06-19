@@ -58,6 +58,11 @@ python3 manage.py db migrate
 python3 manage.py db upgrade
 ```
 
+Generate JS files:
+```bash
+npx babel --watch src --out-dir . --presets react-app/prod
+```
+
 ### Cleanup
 
 ```bash

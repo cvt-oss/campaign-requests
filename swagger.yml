@@ -1,0 +1,79 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: Local development server
+    url: http://localhost:5000/api/1.0.0
+info:
+  description: This is a simple API
+  version: "1.0.0"
+  title: Simple Inventory API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+
+paths:
+  /campaigns:
+    post:
+      tags:
+        - admins
+      summary: adds an inventory item
+      operationId: 'campaigns.hello_print'
+      description: Adds an item to the system
+      responses:
+        '200':
+          description: item created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+        description: Inventory item to add
+components:
+  schemas:
+    Campaign:
+      type: object
+      required:
+        - profile
+        - campaign_text
+      properties:
+        profile:
+          type: string
+          example: profile name
+        campaign_text:
+          type: string
+          example: Campaign Text
+        campaign_start:
+          type: string
+          format: date
+          example: 2017-07-21
+        budget:
+          type: integer
+          example: 1500
+        project_code:
+          type: string
+          example: CZEP001944
+        row:
+          type: integer
+          example: 5000
+        section:
+          type: string
+          example: FND
+        target_group:
+          type: string
+          example: South Europe
+        note:
+          type: string
+          example: Note details
+        comment:
+          type: string
+          example: This campaign is very important
+        approved:
+          type: boolean
+          example: true

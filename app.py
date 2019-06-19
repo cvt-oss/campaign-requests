@@ -1,23 +1,26 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask
+from flask import Flask, render_template
+import connexion
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = connexion.App(__name__, specification_dir='./')
+
+# Read the swagger.yml file to configure the endpoints
+app.add_api('swagger.yml')
 
 if 'APP_SETTINGS' in os.environ:
-    app.config.from_object(os.environ['APP_SETTINGS'])
+    app.app.config.from_object(os.environ['APP_SETTINGS'])
 else:
-    app.config.from_object('config.DevelopmentConfig')
+    app.app.config.from_object('config.DevelopmentConfig')
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-from models import CampaignRequests
+app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app.app)
 
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    return render_template('index.html')
 
 
 @app.route('/<name>')
