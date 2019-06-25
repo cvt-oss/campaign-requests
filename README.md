@@ -12,6 +12,7 @@ Simple REST API to create requests for Campaigns.
   - Psycopg2
   - Flask-SQLAlchemy 
   - Flask-Migrate
+  - Flask-Marshmallow
 - Docker
 - PostgreSQL
 
@@ -54,7 +55,7 @@ Run migrations
 export FLASK_APP=config.py
 flask db init
 
-# On changed schema
+# On changed schema or after initialization
 export PGUSER=campaign_requests
 export PGPASSWORD=campaign_requests
 export DATABASE_URL="postgresql://localhost/campaign_requests"
