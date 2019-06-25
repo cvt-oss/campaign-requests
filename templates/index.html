@@ -10,16 +10,15 @@
     <div class="container">
       <h1>Campaign Requests</h1>
       <br>
-      <div id="content"></div>
-      <div id="like_button"></div>
+      <form action="/api/1.0.0/campaigns" method="post">
+          Profile:<br>
+          <input type="text" name="profile">
+          <br>
+          Campaign text:<br>
+          <input type="text" name="campaign_text">
+          <br><br>
+          <input type="submit" value="Submit">
+      </form>
     </div>
-    <!-- scripts -->
-    <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-    <!-- Load our React component. -->
-    <script src="{{ url_for('static', filename='js/like_button.js') }}"></script>
   </body>
 </html>

@@ -11,7 +11,7 @@ info:
     email: you@your-company.com
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 tags:
   - name: admins
     description: Secured Admin-only calls
@@ -24,14 +24,15 @@ paths:
       tags:
         - admins
       summary: adds an inventory item
-      operationId: 'campaigns.hello_print'
+      operationId: "campaigns.create"
       description: Adds an item to the system
       responses:
         '200':
           description: item created
       requestBody:
+        required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/Campaign'
         description: Inventory item to add
@@ -51,8 +52,8 @@ components:
           example: Campaign Text
         campaign_start:
           type: string
-          format: date
-          example: 2017-07-21
+          format: date-time
+          example: 2017-07-21T17:32:28Z
         budget:
           type: integer
           example: 1500

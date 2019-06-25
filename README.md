@@ -51,16 +51,16 @@ Run migrations
 
 ``` bash
 # Initial setup
-python3 manage.py db init
+export FLASK_APP=config.py
+flask db init
 
 # On changed schema
-python3 manage.py db migrate
-python3 manage.py db upgrade
-```
-
-Generate JS files:
-```bash
-npx babel --watch src --out-dir . --presets react-app/prod
+export PGUSER=campaign_requests
+export PGPASSWORD=campaign_requests
+export DATABASE_URL="postgresql://localhost/campaign_requests"
+export FLASK_APP=config.py
+flask db migrate
+flask db upgrade
 ```
 
 ### Cleanup
