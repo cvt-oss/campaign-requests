@@ -22,19 +22,14 @@ Activate virtualenv
 
 ``` bash
 ./bin/activate
+python3 install -r requirements.txt
 ```
 
 ### Run
 
 ``` bash
-export DATABASE_URL="postgresql://localhost/campaign_requests"
-python3 app.py
-```
-
-```bash
-export POSTGRES_DB=campaign_requests 
-export POSTGRES_USER=campaign_requests 
-export POSTGRES_PASSWORD=campaign_requests 
+export PGUSER=campaign_requests
+export PGPASSWORD=campaign_requests
 docker-compose up -d
 ```
 
@@ -48,7 +43,7 @@ export PGPASSWORD=campaign_requests
 psql -X --set AUTOCOMMIT=off --set ON_ERROR_STOP=on
 ```
 
-Run migrations
+Run migrations locally
 
 ``` bash
 # Initial setup

@@ -11,7 +11,6 @@ flask-marshmallow==0.10.1
 Flask-Migrate==2.5.2
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.4.0
-gpg==1.13.0
 idna==2.8
 inflection==0.3.1
 itsdangerous==1.1.0
