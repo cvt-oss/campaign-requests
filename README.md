@@ -7,32 +7,22 @@ Simple REST API to create requests for Campaigns.
 ### Components
 
 - Python3
-  - virtualenv
   - Flask
   - Psycopg2
   - Flask-SQLAlchemy 
   - Flask-Migrate
   - Flask-Marshmallow
 - Docker
+- Docker-compose
 - PostgreSQL
 
 ### Dev machine setup
 
-Activate virtualenv 
-
 ``` bash
-./bin/activate
-python3 install -r requirements.txt
-```
-
-### Run
-
-``` bash
-export PGPASSWORD=campaign_requests
 docker-compose up -d
 ```
 
-Connect to database
+Connect to local dev database:
 ```bash
 export PGHOST=localhost
 export PGPORT=5432
@@ -42,19 +32,36 @@ export PGPASSWORD=campaign_requests
 psql -X --set AUTOCOMMIT=off --set ON_ERROR_STOP=on
 ```
 
-Run migrations locally
+#### Database migrations
 
-``` bash
-# Initial setup
-export FLASK_APP=config.py
-flask db init
-
-# On changed schema or after initialization
+Following env vars needs to be set:
+```
 export PGUSER=campaign_requests
 export PGPASSWORD=campaign_requests
 export DATABASE_URL="postgresql://localhost/campaign_requests"
-export FLASK_APP=config.py
+```
+
+All commands are executed from within `campaign_requests` directory.
+
+```bash
+cd campaign_requests
+```
+
+Migration scripts initialization:
+``` bash
+# Initial setup
+flask db init
+```
+
+To generate migration scripts for schema update when *models.py* were updated:
+```
 flask db migrate
+```
+
+Applying schema changes manually:
+
+(this should not be necessary since migrations will be run during application startup)
+```
 flask db upgrade
 ```
 
