@@ -24,6 +24,7 @@ class CampaignRequests(db.Model):
     profile = db.Column(db.String())
     campaign_text = db.Column(db.String())
     campaign_start = db.Column(db.DateTime(timezone=True))
+    campaign_end = db.Column(db.DateTime(timezone=True))
     budget = db.Column(db.Integer())
     project_code = db.Column(db.String())
     row = db.Column(db.Integer())
