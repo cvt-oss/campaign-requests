@@ -1,8 +1,6 @@
-FROM python:3
-ENV PYTHONUBUFFERED 1
-RUN mkdir /app
-WORKDIR /app
+FROM registry.redhat.io/ubi8/python-36
+WORKDIR /opt/app-root/src
 
-COPY . /app/
+COPY . /opt/app-root/src/
 RUN pip install -r requirements.txt
 CMD ./start.sh
