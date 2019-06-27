@@ -1,5 +1,20 @@
-from config import db, ma
-from sqlalchemy import DateTime
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
+
+db = SQLAlchemy()
+ma = Marshmallow()
+migrate = Migrate()
+
+
+def init_app(app):
+    db.init_app(app)
+    migrate.init_app(app, db)
+    with app.app_context():
+        db.session.commit()
+        ma.init_app(app)
+
+    return app
 
 
 class CampaignRequests(db.Model):
@@ -17,7 +32,6 @@ class CampaignRequests(db.Model):
     note = db.Column(db.String())
     comment = db.Column(db.String())
     approved = db.Column(db.Boolean())
-
 
     def __repr__(self):
         return '<id {}>'.format(self.id)

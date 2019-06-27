@@ -1,7 +1,7 @@
 from flask import abort, make_response
 from datetime import datetime
-from config import db
-from models import CampaignRequests, CampaignRequestsSchema
+from .models import CampaignRequests, CampaignRequestsSchema, db
+
 
 def create(body):
     """
@@ -39,7 +39,8 @@ def read_one(campaign_id):
     :param campaign_id:   Id of CampaignRequest to find
     :return:              CampaignRequest matching id
     """
-    campaign = CampaignRequests.query.filter(CampaignRequests.id == campaign_id).one_or_none()
+    campaign = CampaignRequests.query.filter(
+        CampaignRequests.id == campaign_id).one_or_none()
 
     # Are we trying to read CampaignRequest that does not exist
     if campaign is None:
@@ -61,7 +62,8 @@ def update_one(campaign_id, body):
     :param body:          dict representing new CampaignRequest
     :return:              created CampaignRequest
     """
-    campaign = CampaignRequests.query.filter(CampaignRequests.id == campaign_id).one_or_none()
+    campaign = CampaignRequests.query.filter(
+        CampaignRequests.id == campaign_id).one_or_none()
 
     # Are we trying to update CampaignRequest that does not exist
     if campaign is None:
@@ -77,7 +79,8 @@ def update_one(campaign_id, body):
     db.session.merge(update_campaign)
     db.session.commit()
 
-    updated_campaign = CampaignRequests.query.filter(CampaignRequests.id == campaign_id).one_or_none()
+    updated_campaign = CampaignRequests.query.filter(
+        CampaignRequests.id == campaign_id).one_or_none()
     if updated_campaign is None:
         return abort(
             500,
@@ -95,7 +98,8 @@ def delete_one(campaign_id):
     :param campaign_id:   id of CampaignRequest to delete
     :return:              id of deleted CampaignRequest
     """
-    campaign = CampaignRequests.query.filter(CampaignRequests.id == campaign_id).one_or_none()
+    campaign = CampaignRequests.query.filter(
+        CampaignRequests.id == campaign_id).one_or_none()
 
     # Are we trying to update CampaignRequest that does not exist
     if campaign is None:
@@ -107,6 +111,5 @@ def delete_one(campaign_id):
     db.session.delete(campaign)
     db.session.commit()
 
-    return make_response(
-            f"Campaign Request with id {campaign_id} deleted", 200
-        )
+    return make_response(f"Campaign Request with id {campaign_id} deleted",
+                         200)

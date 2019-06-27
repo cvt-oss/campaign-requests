@@ -24,7 +24,7 @@ paths:
       tags:
         - admins
       summary: adds an inventory item
-      operationId: "campaigns.create"
+      operationId: "campaign_requests.campaigns.create"
       description: Adds an item to the system
       responses:
         '200':
@@ -38,7 +38,7 @@ paths:
         description: Inventory item to add
     get:
       summary: reads all campaign requests
-      operationId: "campaigns.read_all"
+      operationId: "campaign_requests.campaigns.read_all"
       description: Reads all campaign requests
       responses:
         '200':
@@ -49,7 +49,7 @@ paths:
                 $ref: '#/components/schemas/Campaigns'
   /campaigns/{campaign_id}:
     get:
-      operationId: "campaigns.read_one"
+      operationId: "campaign_requests.campaigns.read_one"
       summary: Read one Campaign Request
       description: Read one Campaign Request
       parameters:
@@ -67,7 +67,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Campaign'
     put:
-      operationId: "campaigns.update_one"
+      operationId: "campaign_requests.campaigns.update_one"
       summary: Update one Campaign Request
       description: Update one Campaign Request
       parameters:
@@ -87,7 +87,7 @@ paths:
         '200':
           description: Campaign Request updated
     delete:
-      operationId: "campaigns.delete_one"
+      operationId: "campaign_requests.campaigns.delete_one"
       summary: Delete one Campaign Request
       description: Delete one Campaign Request
       parameters:

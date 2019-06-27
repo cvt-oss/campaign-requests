@@ -1,7 +1,7 @@
 #!/bin/sh
+set -e
 
-# Create/Update database schema
-flask db upgrade
+# Wait for db startup
+sleep 2
 
-# Start API Server
-exec python app.py
+exec python run.py
