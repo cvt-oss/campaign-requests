@@ -2,6 +2,7 @@ alembic==1.0.10
 certifi==2019.6.16
 chardet==3.0.4
 connexion==2.3.0
+swagger-ui-bundle==0.0.5
 Flask==1.0.3
 flask-marshmallow==0.10.1
 Flask-Migrate==2.5.2

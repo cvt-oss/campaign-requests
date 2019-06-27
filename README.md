@@ -22,6 +22,10 @@ Simple REST API to create requests for Campaigns.
 docker-compose up -d
 ```
 
+Check Swagger UI:
+
+http://localhost:8000/api/v1/ui/
+
 Connect to local dev database:
 ```bash
 export PGHOST=localhost
