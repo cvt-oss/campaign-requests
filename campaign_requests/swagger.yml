@@ -1,0 +1,156 @@
+openapi: 3.0.0
+# Added by API Auto Mocking Plugin
+servers:
+  - description: Local development server
+    url: http://localhost:8000/api/v1
+info:
+  description: This is a simple API
+  version: "v1"
+  title: Simple Inventory API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+tags:
+  - name: admins
+    description: Secured Admin-only calls
+  - name: developers
+    description: Operations available to regular developers
+
+paths:
+  /campaigns:
+    post:
+      tags:
+        - admins
+      summary: adds an inventory item
+      operationId: "campaign_requests.campaigns.create"
+      description: Adds an item to the system
+      responses:
+        '200':
+          description: item created
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+        description: Inventory item to add
+    get:
+      summary: reads all campaign requests
+      operationId: "campaign_requests.campaigns.read_all"
+      description: Reads all campaign requests
+      responses:
+        '200':
+          description: Campaigns found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaigns'
+  /campaigns/{campaign_id}:
+    get:
+      operationId: "campaign_requests.campaigns.read_one"
+      summary: Read one Campaign Request
+      description: Read one Campaign Request
+      parameters:
+        - name: campaign_id
+          in: path
+          description: Id of the campaign to get
+          schema:
+            type: integer
+          required: True
+      responses:
+        200:
+          description: Successfully read person from people data operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+    put:
+      operationId: "campaign_requests.campaigns.update_one"
+      summary: Update one Campaign Request
+      description: Update one Campaign Request
+      parameters:
+        - name: campaign_id
+          in: path
+          description: Campaign Request id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+      responses:
+        '200':
+          description: Campaign Request updated
+    delete:
+      operationId: "campaign_requests.campaigns.delete_one"
+      summary: Delete one Campaign Request
+      description: Delete one Campaign Request
+      parameters:
+        - name: campaign_id
+          in: path
+          description: Campaign Request id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Campaign Request deleted
+components:
+  schemas:
+    Campaign:
+      type: object
+      required:
+        - profile
+        - campaign_text
+        - campaign_start
+        - project_code
+        - row
+        - section
+      properties:
+        profile:
+          type: string
+          example: profile name
+        campaign_text:
+          type: string
+          example: Campaign Text
+        campaign_start:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        campaign_end:
+          type: string
+          format: date-time
+          example: 2017-07-21T17:32:28Z
+        budget:
+          type: integer
+          example: 1500
+        project_code:
+          type: string
+          example: CZEP001944
+        row:
+          type: integer
+          example: 5000
+        section:
+          type: string
+          example: FND
+        target_group:
+          type: string
+          example: South Europe
+        note:
+          type: string
+          example: Note details
+        comment:
+          type: string
+          example: This campaign is very important
+        approved:
+          type: boolean
+          example: true
+    Campaigns:
+      type: array
+      items:
+        $ref: "#/components/schemas/Campaign"

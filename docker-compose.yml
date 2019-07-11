@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  db:
+    container_name: "postgresql-container-requests"
+    image: "postgres:11.3"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "psql-data:/var/lib/postgresql/data"
+    networks:
+      - cvt-campaign-requests
+    environment:
+      - POSTGRES_PASSWORD=campaign_requests
+      - POSTGRES_USER=campaign_requests
+      - POSTGRES_DB=campaign_requests 
+  api:
+    container_name: cvt-campaign-requests
+    build: .
+    command:
+      - ./start.sh
+      - python
+      - run.py
+    volumes:
+        - .:/opt/app-root/src/
+    ports:
+        - "8000:8000"
+    depends_on:
+        - db
+    networks:
+      - cvt-campaign-requests
+    environment:
+        - PGPASSWORD=campaign_requests
+        - PGUSER=campaign_requests
+        - DATABASE_URL=postgresql://db/campaign_requests
+        - FLASK_APP=config.py
+
+volumes:
+  psql-data:
+
+networks:
+  cvt-campaign-requests:
